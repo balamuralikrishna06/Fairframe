@@ -36,7 +36,11 @@ export default function App() {
       setUser(session?.user ?? null);
       if (session?.user) {
         fetchHistory(session.user.id);
-        if (window.location.hash) window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        setTimeout(() => {
+          if (window.location.href.endsWith('#')) {
+            window.history.replaceState(null, '', window.location.pathname + window.location.search);
+          }
+        }, 500);
       }
     });
 
@@ -44,7 +48,11 @@ export default function App() {
       setUser(session?.user ?? null);
       if (session?.user) {
         fetchHistory(session.user.id);
-        if (window.location.hash) window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        setTimeout(() => {
+          if (window.location.href.endsWith('#')) {
+            window.history.replaceState(null, '', window.location.pathname + window.location.search);
+          }
+        }, 500);
       }
     });
 
