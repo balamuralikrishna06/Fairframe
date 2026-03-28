@@ -34,12 +34,18 @@ export default function App() {
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
-      if (session?.user) fetchHistory(session.user.id);
+      if (session?.user) {
+        fetchHistory(session.user.id);
+        if (window.location.hash) window.history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
-      if (session?.user) fetchHistory(session.user.id);
+      if (session?.user) {
+        fetchHistory(session.user.id);
+        if (window.location.hash) window.history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
     });
 
     return () => subscription.unsubscribe();
